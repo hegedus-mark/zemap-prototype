@@ -32,28 +32,6 @@ bias_presets = {
     "middle_low": middle_low_bias
 }
 
-def assign_biases(seed_lines, seed_line_to_preset, jaggedness=0.05):
-    """
-    Assign biases to each seed line based on a preset mapping.
-
-    Parameters:
-        seed_lines: list of seed lines
-        seed_line_to_preset: dict mapping id(seed_line) -> preset_name
-        jaggedness: controls randomness for each generator
-
-    Returns:
-        biases: list of arrays, each sums to 1
-    """
-    biases = []
-
-    for line in seed_lines:
-        length = len(line)
-        preset_name = seed_line_to_preset.get(id(line), "random")  # default to 'random'
-        bias_func = bias_presets[preset_name]
-        bias_array = bias_func(length, jaggedness)
-        biases.append(bias_array)
-
-    return biases
 
 def assign_bias(seed_line, preset_name, jaggedness=0.05):
     """
